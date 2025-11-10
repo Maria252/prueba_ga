@@ -1,6 +1,5 @@
 import streamlit as st
 
-# --- Google Analytics (GA4) ---
 st.markdown("""
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8FNDR77N5"></script>
@@ -8,8 +7,7 @@ st.markdown("""
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'G-P8FNDR77N5');
+  gtag('config', 'G-P8FNDR77N5', { 'debug_mode': true });
 </script>
 """, unsafe_allow_html=True)
 
