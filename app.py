@@ -7,13 +7,15 @@ import streamlit.components.v1 as components   # ← ESTE es el nombre correcto
 # 1) Google Analytics (GA4) – DEBE IR AL INICIO
 # =========================================================
 components.html("""
-<!-- Google tag (gtag.js) -->
+<!-- Remove UA and use GA4 only -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8FNDR77N5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+
+  // Declare ONLY GA4 — no UA linking
   gtag('js', new Date());
-  gtag('config', 'G-P8FNDR77N5', { 'debug_mode': true });
+  gtag('config', 'G-P8FNDR77N5', { 'debug_mode': true, 'send_page_view': true });
 </script>
 """, height=0)
 
