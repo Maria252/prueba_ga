@@ -1,22 +1,22 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from streamlit_autorefresh import st_autorefresh
+from streamlit_autorefresh import st_autorefreshimport streamlit as st
+import streamlit.components.v1 as component
 
 # =========================================================
 # 1) Google Analytics (GA4) – DEBE IR AL INICIO
 # =========================================================
-st.markdown("""
+components.html("""
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-P8FNDR77N5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  // Para ver eventos en DebugView:
   gtag('config', 'G-P8FNDR77N5', { 'debug_mode': true });
 </script>
-""", unsafe_allow_html=True)
+""", height=0)
 
 
 # =========================================================
