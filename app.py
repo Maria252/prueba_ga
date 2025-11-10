@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from streamlit_autorefresh import st_autorefreshimport streamlit as st
+import streamlit as st
 import streamlit.components.v1 as component
-
+from streamlit_autorefresh import st_autorefresh
 # =========================================================
 # 1) Google Analytics (GA4) – DEBE IR AL INICIO
 # =========================================================
