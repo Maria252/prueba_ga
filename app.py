@@ -7,10 +7,9 @@ st.markdown("""
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-
   gtag('js', new Date());
 
-  gtag('config', 'G-P8FNDR77N5', { 'send_page_view': true });
+  gtag('config', 'G-P8FNDR77N5');
 </script>
 """, unsafe_allow_html=True)
 
