@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import time
+from streamlit_autorefresh import st_autorefresh
 
 # =========================================================
 # 1) Google Analytics (GA4) – DEBE IR AL INICIO
@@ -13,7 +13,7 @@ st.markdown("""
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  // Si quieres ver eventos en DebugView:
+  // Para ver eventos en DebugView:
   gtag('config', 'G-P8FNDR77N5', { 'debug_mode': true });
 </script>
 """, unsafe_allow_html=True)
@@ -52,14 +52,12 @@ if page == "Inicio":
     st.title("🚀 App de prueba con GA4 y Streamlit Cloud")
     st.write("Esta página demuestra el tracking completo (A–E).")
 
-    # Demo gráfico
     df = pd.DataFrame({
         'x': range(1, 11),
         'y': np.random.randint(10, 50, 10)
     })
     st.line_chart(df.set_index("x"))
 
-    # Botón con evento
     if st.button("Procesar datos"):
         send_ga_event("button_click", {"button_name": "Procesar datos"})
         st.success("Datos procesados (simulado).")
@@ -75,7 +73,6 @@ elif page == "Indicadores":
     })
     st.table(df)
 
-    # Descarga de archivo con tracking
     csv = df.to_csv(index=False).encode("utf-8")
     st.download_button(
         "Descargar indicadores",
@@ -100,14 +97,16 @@ elif page == "Exportaciones":
 
 
 # =========================================================
-# 5) Tiempo activo del usuario (cada 10s envia engagement)
+# 5) Engagement (Tiempo activo del usuario) - SIN LOOPS
 # =========================================================
-if "engaged_time" not in st.session_state:
-    st.session_state["engaged_time"] = 0
 
-st.session_state["engaged_time"] += 10
-send_ga_event("engagement_ping", {"engaged_seconds": st.session_state["engaged_time"]})
+# Auto refresco cada 10s (10000 ms)
+st_autorefresh(interval=10000, limit=100000, key="engagement_refresh")
 
-# Espera 10s y recarga
-time.sleep(10)
-st.experimental_rerun()
+# Contador de tiempo activo
+if "engaged_seconds" not in st.session_state:
+    st.session_state["engaged_seconds"] = 0
+
+st.session_state["engaged_seconds"] += 10
+
+send_ga_event("engagement_ping", {"engaged_seconds": st.session_state["engaged_seconds"]})
